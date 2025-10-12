@@ -19,11 +19,44 @@
       text-align: center;
       padding: 20px 0;
     }
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+
+    .login-container, .downloads {
+      max-width: 400px;
+      margin: 60px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
+    .login-container h2 {
+      text-align: center;
+      color: #2563eb;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+    
     .file {
       background: white;
       border-radius: 12px;
@@ -63,14 +96,27 @@
     <h1><strong>GL SOLUÇÕES - SUPORTE TÉCNICO</strong></h1>
     <p></p>
   </header>
+
+  <!-- Tela de login -->
+  <div class="login-container" id="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <p id="error" style="color:red; text-align:center;"></p>
+  </div>
+
   <div class="box-1">
     <h3><center></center></h3>
-    <div class="container">
+    <div class="downloads" id="downloads" style="display:none; max-width:900px;">
         <div class="file">
         <h3 style="color: rgb(0, 0, 0);">SUPORTE RIP + PERFIL</h3>
         <a class="download-btn" href="suporteripperfil.html" target="_blank">ACESSAR</a>
         </div>
-
+        <div class="file">
+          <h3 style="color: rgb(0, 0, 0);">SUPORTE EDITORES</h3>
+          <a class="download-btn" href="suporteedit.html" target="_blank">ACESSAR</a>
+      </div>
         <div class="file">
         <h3 style="color: rgb(0, 0, 0);">SUPORTE HOSON</h3>
         <a class="download-btn" href="suportehoson.html" target="_blank">ACESSAR</a>
@@ -96,5 +142,32 @@
  <footer>
     Página criada por <strong>Eduardo Laranjeira</strong>
   </footer>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const error = document.getElementById('error');
+  
+      // Lista de usuários e senhas
+      const usuarios = [
+        { nome: "george", senha: "george" },
+        { nome: "eduardo", senha: "eduardo" },
+        { nome: "wilson", senha: "wilson" },
+        { nome: "lorran", senha: "lorran" },
+        { nome: "cliente2", senha: "senha2" }
+      ];
+  
+      // Verifica se o usuário e senha existem na lista
+      const autorizado = usuarios.some(u => u.nome === user && u.senha === pass);
+  
+      if (autorizado) {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('downloads').style.display = 'block';
+      } else {
+        error.textContent = "Usuário ou senha incorretos!";
+      }
+    }
+  </script>
 </body>
 </html>
